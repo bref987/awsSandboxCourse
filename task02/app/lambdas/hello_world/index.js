@@ -16,6 +16,7 @@ exports.handler = async (event) => {
         };
     }
     console.log('++++++++++++++++');
+    conolele.log(event);
     console.log(method);
     console.log(path);
     console.log(response);
