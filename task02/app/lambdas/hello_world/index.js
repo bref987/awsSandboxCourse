@@ -12,7 +12,7 @@ exports.handler = async (event) => {
         // Return a 400 response for any other requests
         const response = {
             statusCode: 400,
-            message: `Bad request syntax or unsupported method. Request path: ${path}. HTTP method: ${httpMethod}`,
+            message: `Bad request syntax or unsupported method. Request path: ${path}. HTTP method: ${method}`,
         };
         return response;
     }
