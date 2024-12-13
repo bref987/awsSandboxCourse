@@ -15,10 +15,9 @@ exports.handler = async (event) => {
             message: `Bad request syntax or unsupported method. Request path: ${path}. HTTP method: ${method}`,
         };
     }
-    console.log('++++++++++++++++');
-    console.log(event);
-    console.log(method);
-    console.log(path);
-    console.log(response);
+    console.log(event, 'event+++');
+    console.log(method, 'method+++');
+    console.log(path, 'path+++');
+    console.log(response,'response+++');
     return response;
 };
