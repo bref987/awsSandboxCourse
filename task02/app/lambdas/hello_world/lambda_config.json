@@ -15,7 +15,7 @@
   "alias": "learn",
   "url_config": {
     "auth_type": "NONE",
-    "invoke_mode": "BUFFERED"
+    "enabled": true
   },
   "ephemeral_storage": 512,
   "tags": {}
