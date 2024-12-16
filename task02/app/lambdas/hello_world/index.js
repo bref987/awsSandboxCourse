@@ -4,25 +4,17 @@ exports.handler = async (event) => {
     const path = event.rawPath;
     let response;
 
-    response = JSON.stringify({
-        statusCode: 200,
-        message: 'Hello from Lambda stringify'
-    });
-    // if (method === 'GET' && path === '/hello') {
-    //     response = {
-    //         statusCode: 200,
-    //         message: 'Hello from Lambda',
-    //     };
-    // } else {
-    //     // Return a 400 response for any other requests
-    //     response = {
-    //         statusCode: 400,
-    //         message: `Bad request syntax or unsupported method. Request path: ${path}. HTTP method: ${method}`,
-    //     };
-    // }
-    // console.log(event, 'event+++');
-    // console.log(method, 'method+++');
-    // console.log(path, 'path+++');
-    console.log(response,'response+++');
+    if (method === 'GET' && path === '/hello') {
+        response = JSON.stringify({
+            statusCode: 200,
+            message: 'Hello from Lambda',
+        });
+    } else {
+        // Return a 400 response for any other requests
+        response = JSON.stringify({
+            statusCode: 400,
+            message: `Bad request syntax or unsupported method. Request path: ${path}. HTTP method: ${method}`,
+        });
+    }
     return response;
 };
