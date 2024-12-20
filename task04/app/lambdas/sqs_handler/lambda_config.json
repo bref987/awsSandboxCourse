@@ -12,11 +12,11 @@
   "event_sources": [
     {
       "resource_type": "sqs_trigger",
-      "target_queue": "arn:aws:sqs:eu-central-1:905418349556:cmtr-fa0c8eb7-async_queue",
+      "target_queue": "async_queue",
       "batch_size": 10,
       "batch_window": 60,
       "enabled": true,
-      "function_response_types": ["ReportBatchItemFailures"]
+      "region": "eu-central-1"
   }
   ],
   "env_variables": {},
