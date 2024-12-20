@@ -57,7 +57,8 @@
       {
         "resource_type": "sns_topic_trigger",
         "target_topic": "lambda_topic",
-        "lambda": "sqs_handler"      }
+        "lambda": "sqs_handler"
+      }
     ],
     "tags": {}
   }
