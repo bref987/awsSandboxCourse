@@ -37,6 +37,27 @@
     "policy": {},
     "redrive_policy": {},
     "content_based_deduplication": false,
+    "event_sources": [
+      {
+        "resource_type": "sqs_trigger",
+        "target_queue": "async_queue",
+        "lambda": "sqs_handler",
+        "batch_size": 10,
+        "region": "eu-central-1"
+      }
+    ],
+    "tags": {}
+  },
+  "lambda_topic": {
+    "resource_type": "sns_topic",
+    "region": "eu-central-1",
+    "event_sources": [
+      {
+        "resource_type": "sns_topic_trigger",
+        "target_topic": "lambda_topic",
+        "lambda": "sqs_handler"
+      }
+    ],
     "tags": {}
   }
 }
