@@ -15,7 +15,9 @@
             "ssm:PutParameter",
             "ssm:GetParameter",
             "kms:Decrypt",
-            "sqs:ReceiveMessage"
+            "sqs:ReceiveMessage",
+            "sqs:DeleteMessage",
+            "sqs:GetQueueAttributes"
           ],
           "Effect": "Allow",
           "Resource": "*"
@@ -38,26 +40,11 @@
     "policy": {},
     "redrive_policy": {},
     "content_based_deduplication": false,
-    "event_sources": [
-      {
-        "resource_type": "sqs_trigger",
-        "target_queue": "async_queue",
-        "lambda": "sqs_handler",
-        "batch_size": 10
-      }
-    ],
     "tags": {}
   },
   "lambda_topic": {
     "resource_type": "sns_topic",
     "region": "eu-central-1",
-    "event_sources": [
-      {
-        "resource_type": "sns_topic_trigger",
-        "target_topic": "lambda_topic",
-        "lambda": "sns_handler"
-      }
-    ],
     "tags": {}
   }
 }
