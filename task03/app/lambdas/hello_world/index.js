@@ -17,8 +17,5 @@ exports.handler = async (event) => {
     //     });
     // }
     // return response;
-    return JSON.stringify({
-                statusCode: 200,
-                message: 'Hello from Lambda',
-             });
+    return {statusCode: 200, message: 'Hello from Lambda'};
 };
