@@ -42,7 +42,8 @@
         "resource_type": "sqs_trigger",
         "target_queue": "async_queue",
         "lambda": "sqs_handler",
-        "batch_size": 10      }
+        "batch_size": 10
+      }
     ],
     "tags": {}
   },
