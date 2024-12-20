@@ -11,14 +11,15 @@
   "dependencies": [
     {
     "resource_type": "sqs_queue",
-    "resource_name": "async_queue"
+    "resource_name": "cmtr-fa0c8eb7-async_queue"
     }
   ],
   "event_sources": [
     {
       "resource_type": "sqs_trigger",
-      "target_queue": "async_queue",
-      "batch_size": 10
+      "target_queue": "cmtr-fa0c8eb7-async_queue",
+      "batch_size": 10,
+      "region": "eu-central-1"
   }
   ],
   "env_variables": {},
