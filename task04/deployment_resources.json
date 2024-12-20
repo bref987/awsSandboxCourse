@@ -25,7 +25,7 @@
     "resource_type": "iam_policy",
     "tags": {}
   },
-  "cmtr-fa0c8eb7-async_queue": {
+  "async_queue": {
     "resource_type": "sqs_queue",
     "fifo_queue": false,
     "region": "eu-central-1",
