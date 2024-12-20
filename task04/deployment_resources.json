@@ -15,7 +15,9 @@
             "ssm:PutParameter",
             "ssm:GetParameter",
             "kms:Decrypt",
-            "sqs:*",
+            "sqs:ReceiveMessage",
+            "sqs:DeleteMessage",
+            "sqs:GetQueueAttributes",
             "sns:*"
           ],
           "Effect": "Allow",
@@ -24,7 +26,7 @@
       ],
       "Version": "2012-10-17"
     },
-    "resource_type": "NONE",
+    "resource_type": "iam_policy",
     "tags": {}
   },
   "async_queue": {
