@@ -13,10 +13,8 @@
     {
       "resource_type": "sqs_trigger",
       "target_queue": "async_queue",
-      "batch_size": 10,
-      "batch_window": 60,
-      "enabled": true,
-      "region": "eu-central-1"
+      "batch_size": 50
+
   }
   ],
   "env_variables": {},
