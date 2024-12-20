@@ -18,5 +18,8 @@ exports.handler = async (event) => {
     // }
     // return response;
     console.log(event);
-    return event;
+    return JSON.stringify({
+                statusCode: 200,
+                 message: 'Hello from Lambda Sparta',
+             });
 };
