@@ -1,13 +1,16 @@
-import { DynamoDB } from 'aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 
 // Initialize the DynamoDB DocumentClient
-const dynamodb = new DynamoDB.DocumentClient();
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-export async function handler(event) {
+exports.handler = async (event) => {
     try {
-        // Extract principalId and content from the request body
-        const { principalId, content } = JSON.parse(event.body);
+        // Parse the request body
+        const requestBody = JSON.parse(event.body);
+        const { principalId, content } = requestBody;
+
+        console.log(requestBody, '+++++++++++++');
         
         // Generate UUID v4 for id
         const id = uuidv4();
@@ -32,7 +35,10 @@ export async function handler(event) {
         // Return the created event as a response
         return {
             statusCode: 201,
-            body: JSON.stringify(item),
+            body: JSON.stringify({
+                statusCode: 201,
+                event: item
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -47,4 +53,4 @@ export async function handler(event) {
             }
         };
     }
-}
+};
