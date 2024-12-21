@@ -28,6 +28,7 @@
   "task5_api": {
     "resource_type": "api_gateway",
     "deploy_stage": "api",
+    "region": "eu-central-1",
     "dependencies": [],
     "resources": {
       "/events": {
