@@ -1,10 +1,10 @@
-const AWS = require('aws-sdk');
-const { v4: uuidv4 } = require('uuid');
+import { DynamoDB } from 'aws-sdk';
+import { v4 as uuidv4 } from 'uuid';
 
 // Initialize the DynamoDB DocumentClient
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+const dynamodb = new DynamoDB.DocumentClient();
 
-exports.handler = async (event) => {
+export async function handler(event) {
     try {
         // Extract principalId and content from the request body
         const { principalId, content } = JSON.parse(event.body);
@@ -47,4 +47,4 @@ exports.handler = async (event) => {
             }
         };
     }
-};
+}
