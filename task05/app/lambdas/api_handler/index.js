@@ -31,13 +31,13 @@ exports.handler = async (event) => {
 
         return JSON.stringify({
             statusCode: 201,
-            body: { event: item },
+            event: item,
         });
     } catch (error) {
         console.error('Error saving event:', error);
         return JSON.stringify({
             statusCode: 500,
-            body: JSON.stringify({ message: 'Internal Server Error' }),
+            body: { message: 'Internal Server Error' },
         });
     }
 };
