@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const uuid = require('uuid');
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-const tableName = process.env.target_table;;
+const tableName = process.env.target_table;
 
 exports.handler = async (event) => {
     for (const record of event.Records) {
@@ -14,18 +14,20 @@ exports.handler = async (event) => {
             itemKey: newImage.key || oldImage.key,
             modificationTime: new Date().toISOString(),
             updatedAttribute: 'value',
-            oldValue: oldImage.value ? { key: oldImage.key, value: oldImage.value } : null,
-            newValue: newImage.value ? { key: newImage.key, value: newImage.value } : null
+            oldValue: null,
+            newValue: null
         };
 
         switch (eventName) {
             case 'INSERT':
-                auditEntry.oldValue = null;
+                auditEntry.newValue = newImage.value;
                 break;
             case 'MODIFY':
+                auditEntry.oldValue = oldImage.value;
+                auditEntry.newValue = newImage.value;
                 break;
             case 'REMOVE':
-                auditEntry.newValue = null;
+                auditEntry.oldValue = oldImage.value;
                 break;
         }
 
