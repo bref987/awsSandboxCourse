@@ -15,5 +15,6 @@
   "alias": "learn",
   "url_config": {},
   "ephemeral_storage": 512,
+  "target_table": "Events",
   "tags": {}
 }
