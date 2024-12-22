@@ -2,7 +2,7 @@ const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const tableName = process.env.table_name;
+const tableName = process.env.target_table;
 
 exports.handler = async (event) => {
     console.log('event body', event.body);
@@ -10,29 +10,29 @@ exports.handler = async (event) => {
         const requestBody = JSON.parse(event.body);
         const {principalId, content} = requestBody;
 
-    if (!principalId || !content) {
-        return {
-            statusCode: 400,
-            body: JSON.stringify({ message: 'Invalid request body' }),
+        if (!principalId || !content) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ message: 'Invalid request body' }),
+            };
+        }
+
+        const item = {
+            id: uuidv4(),
+            principalId: requestBody.principalId,
+            createdAt: new Date().toISOString(),
+            body: requestBody.content,
         };
-    }
 
-    const item = {
-        id: uuidv4(),
-        principalId: requestBody.principalId,
-        createdAt: new Date().toISOString(),
-        body: requestBody.content,
-    };
+        await dynamoDb.put({
+            TableName: tableName,
+            Item: item,
+        }).promise();
 
-    await dynamoDb.put({
-        TableName: tableName,
-        Item: item,
-    }).promise();
-
-    return {
-        statusCode: 201,
-        body: JSON.stringify({ event: item }),
-    };
+        return {
+            statusCode: 201,
+            body: JSON.stringify({ event: item }),
+        };
     } catch (error) {
         console.error('Error saving event:', error);
         return {
