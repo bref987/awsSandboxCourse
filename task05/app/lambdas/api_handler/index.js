@@ -11,10 +11,10 @@ exports.handler = async (event) => {
         const {principalId, content} = requestBody;
 
         if (!principalId || !content) {
-            return JSON.stringify({
+            return {
                 statusCode: 400,
-                body: { message: 'Invalid request body' },
-            });
+                body: JSON.stringify({statusCode: 400, message: 'Invalid request body' }),
+            };
         }
 
         const item = {
@@ -29,16 +29,16 @@ exports.handler = async (event) => {
             Item: item,
         }).promise();
 
-        return JSON.stringify({
+        return {
             statusCode: 201,
-            event: item,
-        });
+            body: JSON.stringify({statusCode: 201, event: item }),
+        };
     } catch (error) {
         console.error('Error saving event:', error);
-        return JSON.stringify({
+        return {
             statusCode: 500,
-            body: { message: 'Internal Server Error' },
-        });
+            body: JSON.stringify({statusCode: 500, message: 'Internal Server Error' }),
+        };
     }
 };
  
