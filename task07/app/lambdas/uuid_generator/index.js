@@ -14,7 +14,7 @@ exports.handler = async (event) => {
         uuids.push(uuid.v4());
     }
 
-    const fileName = `${executionTime}.json`;
+    const fileName = executionTime;
     const fileContent = JSON.stringify({ ids: uuids });
 
     const params = {
