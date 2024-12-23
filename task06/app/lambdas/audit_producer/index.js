@@ -11,7 +11,7 @@ exports.handler = async (event) => {
 
         let auditEntry = {
             id: uuid.v4(),
-            itemKey: newImage.key || oldImage.key,
+            itemKey: (newImage && newImage.key) || (oldImage && oldImage.key),
             modificationTime: new Date().toISOString(),
             updatedAttribute: 'value',
             oldValue: null,
@@ -20,14 +20,14 @@ exports.handler = async (event) => {
 
         switch (eventName) {
             case 'INSERT':
-                auditEntry.newValue = newImage.value;
+                auditEntry.newValue = newImage ? { key: newImage.key, value: newImage.value } : null;
                 break;
             case 'MODIFY':
-                auditEntry.oldValue = oldImage.value;
-                auditEntry.newValue = newImage.value;
+                auditEntry.oldValue = oldImage ? { key: oldImage.key, value: oldImage.value } : null;
+                auditEntry.newValue = newImage ? { key: newImage.key, value: newImage.value } : null;
                 break;
             case 'REMOVE':
-                auditEntry.oldValue = oldImage.value;
+                auditEntry.oldValue = oldImage ? { key: oldImage.key, value: oldImage.value } : null;
                 break;
         }
 
