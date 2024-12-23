@@ -9,13 +9,23 @@ exports.handler = async (event) => {
         const newImage = AWS.DynamoDB.Converter.unmarshall(dbRecord.NewImage || {});
         const oldImage = AWS.DynamoDB.Converter.unmarshall(dbRecord.OldImage || {});
 
+        const getUpdatedAttribute = (newImage, oldImage) => {
+            if (!newImage || !oldImage) return null;
+            for (const key in newImage) {
+                if (newImage[key] !== oldImage[key]) {
+                    return key;
+                }
+            }
+            return null;
+        };
+
         let auditEntry = {
             id: uuid.v4(),
             itemKey: (newImage && newImage.key) || (oldImage && oldImage.key),
             modificationTime: new Date().toISOString(),
-            updatedAttribute: 'value',
-            oldValue: null,
-            newValue: null
+            updatedAttribute: getUpdatedAttribute(newImage, oldImage),
+            oldValue: oldImage ? { key: oldImage.key, value: oldImage.value } : null,
+            newValue: newImage ? { key: newImage.key, value: newImage.value } : null
         };
 
         switch (eventName) {
