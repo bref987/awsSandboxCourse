@@ -24,17 +24,17 @@ exports.handler = async (event) => {
             itemKey: (newImage && newImage.key) || (oldImage && oldImage.key),
             modificationTime: new Date().toISOString(),
             updatedAttribute: getUpdatedAttribute(newImage, oldImage),
-            oldValue: oldImage ? { key: oldImage.key, value: oldImage.value } : null,
-            newValue: newImage ? { key: newImage.key, value: newImage.value } : null
+            oldValue: oldImage ? oldImage.value : null,
+            newValue: newImage ? newImage.value : null
         };
 
         switch (eventName) {
             case 'INSERT':
-                auditEntry.newValue = newImage ? { key: newImage.key, value: newImage.value } : null;
+                auditEntry.newValue = newImage ? newImage.value : null;
                 break;
             case 'MODIFY':
-                auditEntry.oldValue = oldImage ? { key: oldImage.key, value: oldImage.value } : null;
-                auditEntry.newValue = newImage ? { key: newImage.key, value: newImage.value } : null;
+                auditEntry.oldValue = oldImage ? oldImage.value : null;
+                auditEntry.newValue = newImage ? newImage.value : null;
                 break;
             case 'REMOVE':
                 auditEntry.oldValue = oldImage ? { key: oldImage.key, value: oldImage.value } : null;
