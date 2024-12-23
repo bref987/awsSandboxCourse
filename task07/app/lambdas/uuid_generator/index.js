@@ -4,6 +4,9 @@ const s3 = new AWS.S3();
 const bucketName = process.env.target_bucket;
 
 exports.handler = async (event) => {
+    console.log('Lambda function triggered');
+    console.log('Bucket name:', bucketName);
+
     const executionTime = new Date().toISOString();
     const uuids = [];
 
@@ -11,8 +14,8 @@ exports.handler = async (event) => {
         uuids.push(uuid.v4());
     }
 
-    const fileName = `uuids_${executionTime}.json`;
-    const fileContent = JSON.stringify({ executionTime, uuids });
+    const fileName = `${executionTime}.json`;
+    const fileContent = JSON.stringify({ ids: uuids });
 
     const params = {
         Bucket: bucketName,
